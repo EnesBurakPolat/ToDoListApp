@@ -1,9 +1,9 @@
 # ToDoListApp
 
-<img src="https://github.com/user-attachments/assets/266351a9-e611-4f2a-886c-4293143f110e" alt="Knowledge-Competition 1" width="400">
+<img src="https://github.com/user-attachments/assets/50a89748-54f7-4761-b883-7dfff0e34d0d" alt="Knowledge-Competition 1" width="400">
 
-<img src="https://github.com/user-attachments/assets/01aaa3f2-a5ec-4a37-be03-4a5be7cb17c8" alt="Knowledge-Competition 1" width="400">
+<img src="https://github.com/user-attachments/assets/4be10ad3-c03a-4f7b-9469-c044948fe387" alt="Knowledge-Competition 1" width="400">
 
-<img src="https://github.com/user-attachments/assets/20bc7546-573d-461a-b272-dbf09855bc31" alt="Knowledge-Competition 1" width="400">
+<img src="https://github.com/user-attachments/assets/37149f4c-ced4-48d2-84d0-680dbc3844eb" alt="Knowledge-Competition 1" width="400">
 
-<img src="https://github.com/user-attachments/assets/e8f799b7-3b5b-4e5e-86e0-0231b91e8837" alt="Knowledge-Competition 1" width="400">
+<img src="https://github.com/user-attachments/assets/e3a53776-f05b-4322-bed7-88fae3c075c8" alt="Knowledge-Competition 1" width="400">
