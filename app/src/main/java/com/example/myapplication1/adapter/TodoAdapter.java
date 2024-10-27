@@ -1,12 +1,12 @@
 package com.example.myapplication1.adapter;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,19 +52,30 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             editor.apply();
         });
 
-        holder.itemView.setOnLongClickListener(v -> {
-            // Uzun tıklama ile öğeyi sil
-            todoList.remove(position);
-            notifyItemRemoved(position);
-            mainActivity.saveTodoList(); // Listeyi güncelle ve kaydet
+        // TextView'a tıklama işleyicisi ekleyin
+        holder.textViewTask.setOnClickListener(v -> {
+            if (holder.textViewTask.getMaxLines() == 1) {
+                holder.textViewTask.setMaxLines(Integer.MAX_VALUE);
+                // İsteğe bağlı: Görsel ipucu ekleyin (örneğin, arka plan rengini değiştirin)
+                holder.textViewTask.setBackgroundColor(Color.parseColor("#50077d"));
+                //holder.textViewTask.setBackgroundColor(Color.BLUE); // Arka plan rengini maviye
+                /*
+                Color.RED: Kırmızı
+                Color.GREEN: Yeşil
+                Color.BLUE: Mavi
+                Color.YELLOW: Sarı
+                Color.BLACK: Siyah
+                Color.WHITE: Beyaz
+                #FF0000: Kırmızı (hex kodu)
+                #00FF00: Yeşil (hex kodu)
+                #0000FF: Mavi (hex kodu)
+                 */
 
-            // Silinen görevin tik durumunu SharedPreferences'tan kaldırın
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.remove(task);
-            editor.apply();
-
-            Toast.makeText(mainActivity, "Task removed", Toast.LENGTH_SHORT).show();
-            return true;
+            } else {
+                holder.textViewTask.setMaxLines(1);
+                // İsteğe bağlı: Görsel ipucu kaldırın
+                holder.textViewTask.setBackgroundColor(Color.TRANSPARENT);
+            }
         });
     }
 

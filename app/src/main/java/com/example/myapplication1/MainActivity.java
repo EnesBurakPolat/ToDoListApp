@@ -1,6 +1,7 @@
 package com.example.myapplication1;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -55,27 +56,22 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         todoList = loadTodoList(); // Önceden kaydedilen Todo öğelerini yükle
-        todoAdapter = new TodoAdapter(todoList, this, sharedPreferences); // SharedPreferences'ı iletin
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(todoAdapter);
 
-        // Butona tıklandığında yeni görev ekle
-        buttonAdd.setOnClickListener(view -> {
-            String task = editTextTask.getText().toString();
-            if (!TextUtils.isEmpty(task)) {
-                todoList.add(task);
-                editTextTask.setText("");
-                todoAdapter.notifyItemInserted(todoList.size() - 1);
-                recyclerView.scrollToPosition(todoList.size() - 1); // Yeni öğeye kaydır
-                saveTodoList(); // Güncellenmiş listeyi kaydet
-            }
-        });
-
-        // ItemTouchHelper oluşturun ve RecyclerView'a ekleyin
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        // ItemTouchHelper oluşturun
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false; // Sürükle-bırak devre dışı bırakıldı
+                int fromPosition = viewHolder.getAdapterPosition();
+                int toPosition = target.getAdapterPosition();
+
+                // Görevlerin sırasını değiştirin
+                String movedTask = todoList.remove(fromPosition);
+                todoList.add(toPosition, movedTask);
+
+                // RecyclerView'ı güncelleyin
+                todoAdapter.notifyItemMoved(fromPosition, toPosition);
+                saveTodoList(); // Listeyi kaydedin
+                return true;
             }
 
             @Override
@@ -95,7 +91,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Task removed", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        todoAdapter = new TodoAdapter(todoList, this, sharedPreferences); // SharedPreferences'ı iletin
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(todoAdapter);
+
+        // ItemTouchHelper'ı RecyclerView'a ekleyin
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        // Butona tıklandığında yeni görev ekle
+        buttonAdd.setOnClickListener(view -> {
+            String task = editTextTask.getText().toString();
+            if (!TextUtils.isEmpty(task)) {
+                todoList.add(task);
+                editTextTask.setText("");
+                todoAdapter.notifyItemInserted(todoList.size() - 1);
+                recyclerView.scrollToPosition(todoList.size() - 1); // Yeni öğeye kaydır
+                saveTodoList(); // Güncellenmiş listeyi kaydet
+            }
+        });
     }
 
     // Todo listini kaydet
