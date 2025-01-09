@@ -7,3 +7,4 @@
 <img src="https://github.com/user-attachments/assets/37149f4c-ced4-48d2-84d0-680dbc3844eb" alt="Knowledge-Competition 1" width="350">
 
 <img src="https://github.com/user-attachments/assets/e3a53776-f05b-4322-bed7-88fae3c075c8" alt="Knowledge-Competition 1" width="350">
+.
